@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/10centdev/" />
+<title>tencentmail-list-settings</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tencentmail-list-settings</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>?10cent=contact_lists&tcmKey=d&amp;contactLists=10CentMail,TubeCentric</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>wp-admin/plugins.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=span.0 &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='critical']/ul/li[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>id=tencentmail-lists-select-three</td>
+	<td>label=10CentMail</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=subscribe_button_text</td>
+	<td>10CentMail - Subscribe</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=subscribe_success_message-html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=subscribe_success_message</td>
+	<td>&lt;h1&gt;Successfully Subscribed&lt;/h1&gt;<br /><br />&lt;p&gt;Thank you for your interest.&nbsp;&nbsp;We will keep you updated&lt;/p&gt;</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=unsubscribe_page_content-html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=unsubscribe_page_content</td>
+	<td>&lt;h1&gt;Please Confirm&lt;/h1&gt;</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=unsubscribe_success_message-html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=unsubscribe_success_message</td>
+	<td>&lt;h1&gt;Sorry to see you go&lt;/h1&gt;</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=thank_you_subscribe_message-html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=thank_you_subscribe_message</td>
+	<td>&lt;h1&gt;10CentMail - Thank you for subscribing&lt;/h1&gt;</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=thank_you_double_opt_in_message-html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=thank_you_double_opt_in_message</td>
+	<td>&lt;h1&gt;10CentMail - Thank you for Opting In to receive Emails&lt;/h1&gt;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>thank_you_double_opt_in_subject</td>
+	<td>10CentMail - Thank you for confirming opt in</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>double_opt_in_confirmation_subject</td>
+	<td>10CentMail - Confirm Opt In</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>double_opt_in_confirmation_link_content</td>
+	<td>Confirm Opt In</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>thank_you_subscribe_subject</td>
+	<td>10CentMail - Thank you</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>unsubscribe_link_text</td>
+	<td>Unsubscribe from all future emails</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>unsubscribe_button_text</td>
+	<td>Unsubscribe 10CentMail</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@id='submit'])[2]</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
