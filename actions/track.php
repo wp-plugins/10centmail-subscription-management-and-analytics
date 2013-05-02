@@ -42,19 +42,29 @@ function track()
 
 				$decoded = urldecode($url);
 
-				TenCentDAO::saveTrackingId($trackingId, $type, $url, $ip, $agent, $referer);
+				$urlComponents = parse_url($decoded);
 
-				header("HTTP/1.0 302 Found");
-				header('Location: ' . $decoded);
+				if (!empty($urlComponents)) {
+					$newLocation = $decoded;
+					$scheme = $urlComponents["scheme"];
+					if (empty($scheme)) {
+						$newLocation = "http://" . $decoded;
+					}
 
+					TenCentDAO::saveTrackingId($trackingId, $type, $url, $ip, $agent, $referer);
+
+					header("HTTP/1.0 302 Found");
+					header('Location: ' . $newLocation);
+				} else {
+					TenCentDAO::saveTrackingId($trackingId, $type, "INVALID_URL:" . $url, $ip, $agent, $referer);
+				}
 			} else {
+				TenCentDAO::saveTrackingId($trackingId, $type, "EMPTY_URL", $ip, $agent, $referer);
 				wp_die("Resource Not Found");
 			}
-
 		} else {
 			wp_die("Resource Not Found");
 		}
-
 	} else {
 		wp_die("Resource Not Found");
 	}

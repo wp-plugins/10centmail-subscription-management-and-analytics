@@ -3,7 +3,7 @@
 Plugin Name: 10CentMail
 Plugin URI: http://10centmail.com/blog/10centmail-wordpress-plugin/
 Description: 10CentMail Subscription Management and Analytics plugin for Wordpress.
-Version: 2.0.4
+Version: 2.0.5
 Author: 10CentMail
 Author URI: http://10centmail.com
 License: GPL

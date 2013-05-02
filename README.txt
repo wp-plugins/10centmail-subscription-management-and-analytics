@@ -3,7 +3,7 @@ Contributors: 10CentMail
 Tags: 10CentMail, Email Marketing, Amazon SES
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: trunk
+Stable tag: 2.0.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,9 +26,9 @@ to the application. Install this plugin on any public facing website that will b
 8. Within the 10CentMail Settings, on the Shortcode Generator tab, select a Contact List and configure the Short Code Options. Then Copy the Shortcode and paste it into a Page within Wordpress.
 
 == Screenshots ==
-1. base-settings
-2. contact-list-settings
-3. shortcode-generator
+1. Basic Settings
+2. Contact List Settings
+3. WordPress ShortCode Generator
 
 == Frequently Asked Questions ==
 1. What is 10CentMail
@@ -36,14 +36,18 @@ to the application. Install this plugin on any public facing website that will b
 10CentMail is an email marketing and analytics application that sends email via your chosen email carrier such as Amazon SES. 10CentMail frees you from monthly subscriptions, arbitrary email marketing rules, and most importantly, keeps your precious contact lists and customer data under your control.
 
 == Changelog ==
-20130424
+= 2.0.0 =
 - fixed Custom Field displays when not selected in the tencentmail_subscribe_form shortcode
 
-20130420
+= 2.0.2 =
 - added redirect_url attribute to the tencentmail_subscribe_form
 
-== Upgrade Notice ==
-Initial release.
+= 2.0.4 =
+- initial public release via WordPress.org
 
-== NOTE ==
-Try to avoid changing the name of the plugin directory after an install
+= 2.0.5 =
+- url forwarding will check for a valid scheme on the forwarding url. If none is found http will be added automatically.
+
+== Upgrade Notice ==
+= 2.0.5 =
+THis version enables url forwarding even if you leave out the http scheme.
