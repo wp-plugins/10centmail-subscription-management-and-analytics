@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>10CentMail Wordpress Plugin</title>
+	
+	<link rel="stylesheet" type="text/css" href="../lib/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../lib/prettify.css"/>
+	
+	<style type="text/css">
+		a{
+			outline:none !important;
+		}
+	</style>
+	
+</head>
+<body>
+
+<div class="container">
+	
+	
+	<div class="row">
+		
+		<div class="span12">
+			<h1>10CentMail Wordpress Plugin</h1>
+		</div>
+		
+		<ul class="nav nav-tabs" id="navigation">
+		  <li><a href="#description" data-toggle="tab">Summary</a></li>
+		  <li><a href="#installation" data-toggle="tab">Installation</a></li>
+		  <li><a href="#shortcode" data-toggle="tab">Shortcode</a></li>
+		  <li><a href="#customization" data-toggle="tab">Form Customization</a></li>
+		  <li><a href="#faq" data-toggle="tab">FAQ</a></li>
+		</ul>
+		
+	</div>
+	
+<div class="tab-content">
+		
+	<div class="row tab-pane" id="description">
+		
+		<div class="span12">
+			
+			<h3>Summary</h3>
+			
+			<!-- HOW THE PLUGIN INTEGRATES WITH THE APP -->
+			<p>With 1 in every 4 new websites being built using, Wordpress, we decided to build our core subscription management system to work directly from it's dashboard. When you install our Wordpress plugin, you have instant access to display a sign up forms with a snippet of short code. With this in place, you also have the communication needed to customize the subscribe and unsubscribe process as well as facilitate open and click tracking.</p>
+			
+		</div>
+	
+	</div>
+
+	
+	
+	<div class="row tab-pane" id="installation">
+		
+		<div class="span12">
+			
+			<h3>Installation</h3>
+			
+			
+		</div>
+	
+	</div>
+
+
+
+	<div class="row tab-pane" id="shortcode">
+		
+		<div class="span12">
+			
+			<h3>Shortcode</h3>
+
+			<p>The 10CentMail plugin leverages the wordpress <a href="http://codex.wordpress.org/Shortcode_API">shortcode api</a></p>
+				
+			<p>To render a 10CentMail subscribe form just place the following shortcode into any Wordpress page.</p>
+			
+			<p><code>[tencentmail_subscribe_form list="List Name"]</code></p> 
+			
+			<p>The shortcode accepts the following parameters :</p> 
+            
+			<table class="table table-bordered table-striped">
+			    <thead>
+			    	<tr>
+			    		<th style="width:50px">field</th>
+			    		<th style="width:100px">value</th>
+			    		<th style="width:200px">label</th>
+			    	</tr>
+			    </thead>
+			    <tbody>
+			    	<tr>
+			    	  <td>list</td>
+			    	  <td>true/false</td>
+			    	  <td>NA * use the name of your 10CentMail Contact List</td>
+			    	</tr>
+			    	<tr>
+			    	  <td>first_name</td>
+			    	  <td>true/false</td>
+			    	  <td>First Name</td>
+			    	</tr>
+			    	<tr>
+			    	  <td>last_name</td>
+			    	  <td>true/false</td>
+			    	  <td>Last Name</td>
+			    	</tr>
+			    	<tr>
+			    	  <td>full_name</td>
+			    	  <td>true/false</td>
+			    	  <td>Full Name</td>
+			    	</tr>
+			    	<tr>
+			    	  <td>custom_field</td>
+			    	  <td>true/false</td>
+			    	  <td>* Defined by <code>custom_label</code></td>
+			    	</tr>
+			    	<tr>
+			    	  <td>custom_label</td>
+			    	  <td>the label text to represent your custom field.  ex Age, Location, etc</td>
+			    	  <td></td>
+			    	</tr>
+            
+				</tbody>
+			</table>
+            
+			<p><code>Email Address</code> is a requirement in gathering subscriptions thus is rendered without having to set within shortcode definition.</p>
+         
+			<!-- DO WE WANT TO DOCUMENT THE SHORTCODE GENERATOR -->
+			
+			
+		</div>
+	
+	</div>
+
+	
+
+<div id="customization" class="tab-pane">
+
+	<div class="row" >
+		
+		<div class="span12">
+			
+			<h3>Form Customization</h3>
+			
+			<p>You will need to have a basic understanding of html &amp; css to continue following this guide. </p>
+			
+			<p>The subscription form is surrounded in a parent div with an id of <code>tencentmail_subscribe_form</code> which you can key off of to style the rendered form</p>
+
+			<p>Each field definition will render the following html structure</p>
+       
+<pre class="prettyprint linenums">
+	&lt;p&gt;
+	 &lt;label&gt;Full Name&lt;/label&gt;
+	 &lt;input type="text" name="full_name" value=""/&gt;
+	&lt;/p&gt;
+</pre>
+
+
+			<p>The submit is wrapped in a paragraph with a class name of <code>tencentmail_submit_wrapper</code></p>
+				
+<pre class="prettyprint linenums">
+	&lt;p class="tencentmail_submit_wrapper"&gt;
+	&lt;input type="submit" value="Submit"/&gt;
+	&lt;/p&gt;
+</pre>
+
+
+			<p>CSS allows for many ways of customizing html elements.  In the following example we will customize the rendered form, adding a border, some padding, horizontal align the labels and inputs as well as create a custom submit button style</p>
+				
+			<p><code>[tencentmail_subscribe_form list="List Name" full_name="true"]</code></p>
+	
+	
+			<h3>Custom styles</h3>
+	
+	
+<pre class="prettyprint linenums">
+	&lt;style type="text/css"&gt;
+	
+	 #tencentmail_subscribe_form{
+	   padding:20px;
+	   background:#f8f8f8;
+	   border:solid 1px #ddd;
+	 }
+	 
+	 #tencentmail_subscribe_form label{
+	   width:150px;
+	   margin-right:10px;
+	   text-align:right;
+	   display:inline-block;
+	 }
+	 
+	 #tencentmail_subscribe_form input[type="text"]{
+	   display:inline-block;
+	 }
+	 
+	 .tencentmail_submit_wrapper{
+	   width:315px;
+	   text-align:right;
+	 }
+	 
+	 #tencentmail_subscribe_form input[type="submit"]{
+	   color: white;
+	   padding: 4px;
+	   margin: 0 0 2px;
+	   font-size: 12px;
+	   cursor:pointer;
+	   cursor:hand;
+	   outline: medium none;
+	   vertical-align: bottom;
+	   background: #09BF58;
+	   border: 1px solid #098A45;
+	   border-radius: 3px;
+	   text-shadow: 0 1px 1px #034E26;
+	 }
+	 
+	&lt;/style&gt;
+</pre>
+			
+		
+		</div>
+		
+	</div>
+	
+
+	<div class="row">
+
+		<div class="span1"></div>
+
+		<div class="span5">
+			<h3>Before</h3>
+			<img src="img/form-pre.png" title="10CentMail Subscription Form" class="img"/>
+		</div>		
+			
+		<div class="span5">
+			<h3>After</h3>
+			<img src="img/form-post.png" title="10CentMail Subscription Form" class="img" />
+		</div>
+		
+		<div class="span1"></div>
+		
+	</div>
+	
+</div>
+
+
+	<div class="row tab-pane" id="faq">
+	
+		<div class="span12">
+			<h3>FAQ</h3>
+			
+			
+		</div>
+		
+	</div>
+
+
+</div>
+	
+<!-- end  of tab content -->
+	
+	<footer class="footer">
+		<div class="span12">
+			<p></p>
+		</div>
+	</footer>
+	
+</div>
+
+
+<script type="text/javascript" src="../lib/jquery.js"></script>
+<script type="text/javascript" src="../lib/bootstrap.custom.min.js"></script>
+
+
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$('#navigation a:first').click();
+	});
+	
+</script>
+
+<body>
+</html>
