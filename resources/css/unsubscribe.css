@@ -1,0 +1,16 @@
+body{
+	background:#f8f8f8;
+	font-size:13px;
+	color: #333;
+	line-height:1.7em;
+	font-family:Arial, Verdana;
+	text-align:center;
+}	
+#content{
+	width:400px;
+	text-align:left;
+	padding:20px;
+	margin:10px auto;
+	background:#fff;
+	border:solid 1px #ebebeb;
+}
