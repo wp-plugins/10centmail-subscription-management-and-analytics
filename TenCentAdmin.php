@@ -45,7 +45,6 @@ function tcm_settings_page()
 
 	}
 
-
 	$listSettings = array();
 	if (!empty($id)) {
 		$listSettings = TenCentDao::getContactListSettings($id);
@@ -68,10 +67,7 @@ function tcm_settings_page()
 			"thank_you_double_opt_in_message" => ""
 		);
 	}
-
-
 	?>
-
 
 	<div class="wrap tencentmail-settings-wrapper">
 
@@ -923,8 +919,6 @@ function tcm_settings_page()
 		}
 
 	</script>
-
 <?php
 }
-
 ?>

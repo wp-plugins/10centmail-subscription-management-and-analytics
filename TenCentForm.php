@@ -92,8 +92,15 @@ class TenCentForm
 
 		foreach ($options as $property => $value) {
 			if ($value && !empty($baseSubscriptionMapper->$property)) {
-				if ($property != "list" && $value == "true") $mixedMapping->$property = $baseSubscriptionMapper->$property;
-				if ($property == 'list') $mixedMapping->list->value = $value;
+				if ($property == 'list') {
+					$mixedMapping->list->value = $value;
+					continue;
+				}
+				if ($property == 'requires_double_opt') {
+					$mixedMapping->requires_double_opt->value = $value;
+					continue;
+				}
+				if ($value == "true") $mixedMapping->$property = $baseSubscriptionMapper->$property;
 			}
 			if ($property == 'custom_label')
 			{

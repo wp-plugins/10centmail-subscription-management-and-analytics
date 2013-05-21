@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: 10CentMail
-Tags: 10CentMail, Email Marketing, Amazon SES
+Tags: 10CentMail, Email Marketing, Amazon SES, email
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 2.0.5
+Stable tag: 2.1.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,12 @@ to the application. Install this plugin on any public facing website that will b
 = 2.0.5 =
 - url forwarding will check for a valid scheme on the forwarding url. If none is found http will be added automatically.
 
+= 2.1.0 =
+- added support for WordPress MultiSite, aka WPMU
+
 == Upgrade Notice ==
 = 2.0.5 =
-THis version enables url forwarding even if you leave out the http scheme.
+This version enables url forwarding even if you leave out the http scheme.
+
+= 2.1.0 =
+This version is compatible with and works well on both WordPress and WordPress MultiSite

@@ -21,7 +21,6 @@ class TenDaoUtil
 	const SUBSCRIPTION_CONFIRM_STRING = "SubscriptionConfirmation";
 	const SUBSCRIPTION_CONFIRM = 1;
 
-
 	public static function tableExists($tableName)
 	{
 		global $wpdb;
@@ -29,13 +28,11 @@ class TenDaoUtil
 		return (sizeof($tables) == 0) ? false : true;
 	}
 
-
 	public static function getTableName($tableName)
 	{
 		global $wpdb;
-		return $wpdb->prefix . $tableName;
+		return $wpdb->base_prefix . $tableName;
 	}
-
 
 	public static function getSubscriptionTableSQL()
 	{
@@ -54,10 +51,10 @@ class TenDaoUtil
 			campaignId int,
 			confirmedDoubleOpt int NULL,
 			requiresDoubleOpt int NOT NULL,
+			siteId int(11),
 			UNIQUE KEY id (id)
 		);";
 	}
-
 
 	public static function getTrackingTableSQL()
 	{
@@ -71,10 +68,10 @@ class TenDaoUtil
 			agent VARCHAR(255),
 			url VARCHAR(255),
 			referer VARCHAR(255),
+			siteId int(11),
 			UNIQUE KEY id (id)
 		);";
 	}
-
 
 	public static function getListsTableSQL()
 	{
@@ -83,10 +80,10 @@ class TenDaoUtil
 			id mediumint(9) NOT NULL AUTO_INCREMENT,
 			list VARCHAR(255) NOT NULL,
 			active int NOT NULL,
+			siteId int(11),
 			UNIQUE KEY id (id)
 		);";
 	}
-
 
 	public static function getSettingsTableSQL()
 	{
@@ -95,10 +92,10 @@ class TenDaoUtil
 			id mediumint(9) NOT NULL AUTO_INCREMENT,
 			setting VARCHAR(255) NOT NULL,
 			value TEXT NOT NULL,
+			siteId int(11),
 			UNIQUE KEY id (id)
 		);";
 	}
-
 
 	public static function getContactListSettingsTableSQL()
 	{
@@ -118,10 +115,10 @@ class TenDaoUtil
 			double_opt_in_confirmation_link_content TEXT,
 			thank_you_double_opt_in_subject TEXT,
 			thank_you_double_opt_in_message TEXT,
+			siteId int(11),
 			UNIQUE KEY id (id)
 		);";
 	}
-
 
 	public static function getSnsMessageTableSQL()
 	{
@@ -131,9 +128,9 @@ class TenDaoUtil
 			date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 			type mediumint(9) NOT NULL,
 			message TEXT NOT NULL,
+			siteId int(11),
 			UNIQUE KEY id (id)
 		);";
 
 	}
-
 }

@@ -3,7 +3,7 @@
 Plugin Name: 10CentMail
 Plugin URI: http://10centmail.com/blog/10centmail-wordpress-plugin/
 Description: 10CentMail Subscription Management and Analytics plugin for Wordpress.
-Version: 2.0.5
+Version: 2.1.0
 Author: 10CentMail
 Author URI: http://10centmail.com
 License: GPL
@@ -62,16 +62,17 @@ function tencentmail_install()
 
 			//save settings
 			TenCentDao::addSetting("tencentmail_key", "");
-			TenCentDao::addSetting("tencentmail_version", $pluginData["Version"]);
-//			TenCentDao::addSetting("tencentmail_wordpress_endpoints_url", get_endpoints_url());
+			TenCentDao::addSetting("tencentmail_version", $pluginData["Version"], true);
 			TenCentDao::addSetting("tencentmail_company_name", get_bloginfo('name'));
 			TenCentDao::addSetting("tencentmail_from_email", get_bloginfo('admin_email'));
 			TenCentDao::addSetting("tencentmail_from_name", get_bloginfo('name'));
 			TenCentDao::addSetting("tencentmail_support_email", get_bloginfo('admin_email'));
 			TenCentDao::addSetting("tencentmail_notification_emails", get_bloginfo('admin_email'));
+		} else {
+			TenCentDao::addSiteIdToExistingTables();
 		}
 
-		TenCentDao::addSetting("tencentmail_version", $pluginData["Version"]);
+		TenCentDao::addSetting("tencentmail_version", $pluginData["Version"], true);
 	} catch (Exception $e) {
 		trigger_error($e->getMessage(), E_USER_ERROR);
 	}
@@ -95,7 +96,9 @@ function get_endpoints_url()
 
 function tcm_add_settings()
 {
-	add_options_page("10CentMail Plugin Settings", "10CentMail", 'manage_options', 'tencentmail_settings', 'tcm_settings_page');
+	if (current_user_can('manage_options')) {
+		add_options_page("10CentMail Plugin Settings", "10CentMail", 'manage_options', 'tencentmail_settings', 'tcm_settings_page');
+	}
 
 	$icon = str_replace("TenCent.php", "resources/images/tencentmail-icon.png", plugin_basename(__FILE__));
 	$iconurl = plugins_url() . '/' . $icon;
