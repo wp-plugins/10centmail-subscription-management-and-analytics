@@ -57,3 +57,6 @@ This version enables url forwarding even if you leave out the http scheme.
 
 = 2.1.0 =
 This version is compatible with and works well on both WordPress and WordPress MultiSite
+
+= 2.1.36
+Important fix for all WordPress sites, including MultiSite
