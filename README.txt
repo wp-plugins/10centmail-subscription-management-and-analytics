@@ -3,7 +3,7 @@ Contributors: 10CentMail
 Tags: 10CentMail, Email Marketing, Amazon SES, email
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 2.1.0
+Stable tag: 2.1.36
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
