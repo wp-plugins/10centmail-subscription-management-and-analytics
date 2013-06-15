@@ -4,7 +4,7 @@ defined('ABSPATH') OR exit;
 Plugin Name: 10CentMail
 Plugin URI: http://10centmail.com/blog/10centmail-wordpress-plugin/
 Description: 10CentMail Subscription Management and Analytics plugin for Wordpress.
-Version: 2.1.36
+Version: 2.1.45
 Author: 10CentMail
 Author URI: http://10centmail.com
 License: GPL
@@ -12,6 +12,9 @@ License: GPL
 
 //global $wpdb;
 //$wpdb->show_errors(true);
+
+define('MY_PLUGIN_NAME', 'tencentmail');
+define('MY_PLUGIN_BASE_URL', plugins_url() . '/' . MY_PLUGIN_NAME);
 
 include_once('util/Utils.php');
 include_once('util/TenDaoUtil.php');
@@ -52,6 +55,7 @@ add_action('init', 'do_output_buffer'); //allow redirection, even if my theme st
 add_action('plugins_loaded', 'tencentmail_setup_database');
 
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'tcm_plugin_actions', 10, 1);
+//add_filter('plugin_action_links_' . MY_PLUGIN_FILE, 'tcm_plugin_actions', 10, 1);
 register_activation_hook(__FILE__, 'tencentmail_activate');
 register_deactivation_hook(__FILE__, 'tencentmail_deactivate');
 register_uninstall_hook(__FILE__, 'tencentmail_uninstall');
@@ -145,7 +149,8 @@ function tcm_add_settings()
 		add_options_page("10CentMail Plugin Settings", "10CentMail", 'manage_options', 'tencentmail_settings', 'tcm_settings_page');
 	}
 
-	$icon = str_replace("TenCent.php", "resources/images/tencentmail-icon.png", plugin_basename(__FILE__));
+//	$icon = str_replace("TenCent.php", "resources/images/tencentmail-icon.png", plugin_basename(__FILE__));
+	$icon = MY_PLUGIN_NAME . "/resources/images/tencentmail-icon.png";
 	$iconurl = plugins_url() . '/' . $icon;
 
 	add_menu_page("10CentMail Plugin Settings", "10CentMail", 'manage_options', 'tencentmail_settings', 'tcm_settings_page', $iconurl);
