@@ -3,7 +3,7 @@ Contributors: 10CentMail
 Tags: 10CentMail, Email Marketing, Amazon SES, email
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 2.1.45
+Stable tag: 2.1.48
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,3 +63,6 @@ Important fix for all WordPress sites, including MultiSite
 
 = 2.1.45
 Fix for WordPress sites that use symlinks
+
+= 2.1.48
+Updated for WordPress MultiSite and WordPress sites with or without symlinks, on sites that use arbitrary plugin names

@@ -4,8 +4,10 @@ function tcm_settings_page()
 {
 
 //	$css = str_replace("TenCentAdmin.php", "resources/css/admin.css", plugin_basename(__FILE__));
-	$css = MY_PLUGIN_NAME . "/resources/css/admin.css";
-	echo '<link rel="stylesheet" type="text/css" href="' . plugins_url() . '/' . $css . '"/>';
+//	$css = MY_PLUGIN_NAME . "/resources/css/admin.css";
+//	echo '<link rel="stylesheet" type="text/css" href="' . plugins_url() . '/' . $css . '"/>';
+	$css = "resources/css/admin.css";
+	echo '<link rel="stylesheet" type="text/css" href="' . MY_PLUGIN_BASE_URL . $css . '"/>';
 
 	$id = "";
 	$list = "";

@@ -7,8 +7,10 @@
 	tencentmail_version_metadata();
 
 	//$css = str_replace("actions/debug.php", "resources/css/debug.css", plugin_basename(__FILE__));
-	$css = MY_PLUGIN_NAME . "/resources/css/debug.css";
-	echo '<link rel="stylesheet" type="text/css" href="' . plugins_url() . '/' . $css . '"/>';
+//	$css = MY_PLUGIN_NAME . "/resources/css/debug.css";
+//	echo '<link rel="stylesheet" type="text/css" href="' . plugins_url() . '/' . $css . '"/>';
+	$css = "resources/css/debug.css";
+	echo '<link rel="stylesheet" type="text/css" href="' . MY_PLUGIN_BASE_URL . $css . '"/>';
 
 	$response = (object)array();
 	$data = TenCentDao::data($dataType);

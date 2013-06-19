@@ -4,7 +4,7 @@ defined('ABSPATH') OR exit;
 Plugin Name: 10CentMail
 Plugin URI: http://10centmail.com/blog/10centmail-wordpress-plugin/
 Description: 10CentMail Subscription Management and Analytics plugin for Wordpress.
-Version: 2.1.45
+Version: 2.1.48
 Author: 10CentMail
 Author URI: http://10centmail.com
 License: GPL
@@ -12,9 +12,44 @@ License: GPL
 
 //global $wpdb;
 //$wpdb->show_errors(true);
-
-define('MY_PLUGIN_NAME', 'tencentmail');
-define('MY_PLUGIN_BASE_URL', plugins_url() . '/' . MY_PLUGIN_NAME);
+if (!defined('MY_PLUGIN_BASE_URL')) {
+//	$pluginDir = WP_CONTENT_DIR . '/plugins';
+//	if ($linked = readlink($pluginDir)) {
+//		$pluginDir = WP_CONTENT_DIR . '/' . $linked;
+//	}
+//	$_SERVER["SCRIPT_FILENAME"]
+//	$_SERVER['REQUEST_URL']
+//	$pluginDir = str_replace('\\', '/', $pluginDir); // sanitize for Win32 installs
+//	$pluginDir = preg_replace('|/+|','/', $pluginDir); // remove any duplicate slash
+//	define('MY_PLUGIN_DIR', $pluginDir); // full path, no trailing slash
+	// get the folder for this plugin by getting the directory name for this __FILE__ then,
+	//  break up into components by splitting along / \
+	//  pick the 2nd to last item from the list
+	//$pathParts = explode("")
+	//$pluginName = pathinfo($pluginDir, PATHINFO_BASENAME);
+	//substr()
+	//	$icon = str_replace("TenCent.php", "resources/images/tencentmail-icon.png", plugin_basename(__FILE__));
+//	define('MY_PLUGIN_NAME', str_("/" . $pluginName, "resources/images/tencentmail-icon.png", plugin_basename(__FILE__)));
+//	define('MY_PLUGIN_BASE_URL', plugins_url() . '/' . MY_PLUGIN_NAME);
+//	$myPluginBaseUrl = str_replace("TenCent.php","", $_SERVER['REQUEST_URL']);
+//	$thispath = str_replace('\\', '/', preg_replace('|/+|', '/', $_SERVER['PHP_SELF']));
+//	$scriptname = end(explode('/', $thispath));
+//	$scriptpath = str_replace($scriptname, '', $_SERVER['PHP_SELF']);
+	$thispath = str_replace('\\', '/', preg_replace('|/+|', '/', __FILE__));
+	$pathparts = explode('/', $thispath);
+	end($pathparts);
+	$pluginsubdir = prev($pathparts);
+	$scriptname = "TenCent.php";
+	$scriptpath = plugins_url() . '/' . $pluginsubdir . '/';
+	if (WP_DEBUG) {
+		echo '$thispath = ' . $thispath . '<br />';
+		var_dump($pathparts);
+		echo '$pluginsubdir = ' . $pluginsubdir . '<br />';
+		echo '$scriptname = ' . $scriptname . '<br />';
+		echo '$scriptpath = ' . $scriptpath . '<br />';
+	}
+	define('MY_PLUGIN_BASE_URL', $scriptpath);
+}
 
 include_once('util/Utils.php');
 include_once('util/TenDaoUtil.php');
@@ -150,8 +185,11 @@ function tcm_add_settings()
 	}
 
 //	$icon = str_replace("TenCent.php", "resources/images/tencentmail-icon.png", plugin_basename(__FILE__));
-	$icon = MY_PLUGIN_NAME . "/resources/images/tencentmail-icon.png";
-	$iconurl = plugins_url() . '/' . $icon;
+//	$icon = MY_PLUGIN_NAME . "/resources/images/tencentmail-icon.png";
+//	$iconurl = plugins_url() . '/' . $icon;
+
+	$icon = "resources/images/tencentmail-icon.png";
+	$iconurl = MY_PLUGIN_BASE_URL . $icon;
 
 	add_menu_page("10CentMail Plugin Settings", "10CentMail", 'manage_options', 'tencentmail_settings', 'tcm_settings_page', $iconurl);
 }

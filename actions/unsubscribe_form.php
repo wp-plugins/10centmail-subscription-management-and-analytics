@@ -10,8 +10,8 @@ $campaignId = $_REQUEST['campaignId'];
 	<?php
 
 //	$css = str_replace("actions/unsubscribe_form.php", "resources/css/unsubscribe.css", plugin_basename(__FILE__));
-	$css = MY_PLUGIN_NAME . "/resources/css/unsubscribe.css";
-	echo '<link rel="stylesheet" type="text/css" href="' . plugins_url() . '/' . $css . '"/>';
+	$css = "resources/css/unsubscribe.css";
+	echo '<link rel="stylesheet" type="text/css" href="' . MY_PLUGIN_BASE_URL . $css . '"/>';
 
 	?>
 </head>
