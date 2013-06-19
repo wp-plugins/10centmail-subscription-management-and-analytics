@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/10centdev/" />
+<title>install-base-settings</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">install-base-settings</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>wp-admin/plugins.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Activate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=span.0 &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tencentmail_key</td>
+	<td>d</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=tencentmail_company_name</td>
+	<td>10CentMailDev</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=tencentmail_from_name</td>
+	<td>10CentMail Support</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=tencentmail_support_email</td>
+	<td>mike@10centmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=tencentmail_from_email</td>
+	<td>mike@10centmail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tencentmail_notification_emails</td>
+	<td>mike@10centmail.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@id='submit'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Successfully saved Key</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Updated Company Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Updated Support Email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Updated From Email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Updated From Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Updated Notification Emails</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

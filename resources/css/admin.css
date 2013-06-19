@@ -1,0 +1,277 @@
+.tencentmail-settings-wrapper {
+	margin-right: 195px;
+	margin-bottom: 30px;
+}
+
+.tencentmail-settings {
+
+}
+
+.tencentmail-settings .settings-wrapper {
+	padding: 10px;
+	margin: 0px auto 0px auto;
+	background: #f8f8f8;
+}
+
+.critical {
+	padding: 10px;
+	background: #ffffcc !important;
+	border: solid 1px #ddd;
+}
+
+.tencentmail-settings h3 {
+	font-size: 18px;
+}
+
+.tencentmail-settings .note {
+	font-size: 10px;
+	font-style: italic;
+	color: #555;
+	font-weight: normal;
+	display: block;
+}
+
+.tencentmail-settings li {
+	margin-top: 20px;
+}
+
+.tencentmail-settings .critical-setting {
+	color: #C03634;
+}
+
+.tencentmail-settings input[type="text"] {
+	vertical-align: top;
+}
+
+.tencentmail-settings label {
+	display: block;
+	font-weight: bold;
+	text-align: left;
+	margin-right: 10px;
+	vertical-align: top;
+	color: #222;
+}
+
+.tencentmail-settings textarea {
+	vertical-align: top;
+	width: 400px;
+}
+
+.tencentmail-settings .form-break {
+	height: 1px;
+	marging: 20px auto;
+	background: #efefef;
+	border-bottom: solid 1px #fff;
+}
+
+#settings-menu-wrapper {
+	opacity: 1.0;
+	top: 40px;
+	right: 15px;
+	width: 180px;
+	z-index: 10000;
+	position: fixed;
+	background: transparent;
+}
+
+.settings-menu {
+	margin-bottom: 20px;
+	background: #efefef;
+	border: solid 1px #ddd;
+	box-shadow: 0px 0px 10px 1px #efefef;
+	-moz-box-shadow: 0px 0px 10px 1px #efefef;
+	-webkit-box-shadow: 0px 0px 10px 1px #efefef;
+}
+
+.settings-menu:hover {
+	opacity: 1.0;
+}
+
+.settings-menu span {
+	text-decoration: none;
+	padding: 5px 10px;
+	display: block;
+	color: #fff;
+	font-size: 13px;
+	text-align: left;
+	background: #737373;
+	border: solid 1px #444;
+}
+
+.settings-menu a {
+	text-decoration: none;
+	padding: 5px 10px;
+	display: block;
+	border-top: solid 1px #fff;
+	border-bottom: solid 1px #ddd;
+}
+
+.settings-menu a:active,
+.settings-menu a:focus {
+	background: #ebebeb;
+}
+
+.tencentmail-list-settings-wrapper {
+	padding: 10px;
+	background: #f8f8f8;
+}
+
+.tencentmail-list-settings-outer-wrapper {
+	margin-bottom: 30px;
+}
+
+h2.contactLists {
+	font-size: 24px;
+}
+
+h2.contactLists span {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.clear {
+	clear: both;
+}
+
+.inactive {
+	font-size: 11px;
+	color: #777;
+}
+
+ul.navigation {
+	margin: 0px 0px 0px 0px;
+	border-bottom: solid 1px #ddd;
+}
+
+ul.navigation li {
+	cursor: pointer;
+	cursor: hand;
+	display: inline-block;
+	padding: 5px 10px;
+	margin: 0px 0px -1px 0px;
+	background: #fff;
+	border: solid 1px #ddd;
+}
+
+ul.navigation li:hover {
+	background: #efefef;
+}
+
+ul.navigation li.active {
+	background: #f8f8f8;
+	border-top: solid 1px #ddd;
+	border-right: solid 1px #ddd;
+	border-left: solid 1px #ddd;
+	border-bottom: solid 1px #f8f8f8;
+}
+
+.tencent-tabcontent {
+	min-height: 300px;
+	background: #f8f8f8;
+	border-left: solid 1px #ddd;
+	border-right: solid 1px #ddd;
+	border-bottom: solid 1px #ddd;
+}
+
+.tab-innercontent {
+	display: none;
+}
+
+.shortcode-generator {
+}
+
+.shortcode-generator h3 {
+	margin: 25px 0px 0px 0px;
+}
+
+.shortcode-listselect {
+	margin: 10px 0px;
+}
+
+.shortcode-output {
+	margin: 0px 0px 30px 0px;
+}
+
+#shortcode-output {
+	color: #333;
+	padding: 0px;
+	font-size: 17px;
+	font-style: italic;
+	font-family: courier;
+	background: #fcfceb;
+	background: #EAEADF;
+	vertical-align: middle;
+	border: dotted 1px #ddd;
+}
+
+.shortcode-option {
+	display: inline-block;
+	margin: 4px 10px;
+}
+
+.shortcode-generator label {
+	margin: 0px 5px;
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+.shortcode-listselect label {
+	display: block;
+}
+
+.shortcode-generator select {
+	width: 200px;
+	vertical-align: bottom;
+}
+
+#customLabel, #redirectUrl {
+	opacity: 0;
+}
+
+#redirectUrl {
+	width: 300px;
+}
+
+#customLabelError, #redirectUrlError {
+	opacity: 0;
+	line-height: 1.2em;
+	background: #FFEBE8;
+	border: dotted 1px #d5857a;
+	vertical-align: bottom;
+	padding: 4px 7px;
+	margin: 0px 0px 2px 10px;
+}
+
+.custom-field-left {
+	height: 30px;
+}
+
+.tabcontent-outerwrapper {
+}
+
+.settings-wrapper table {
+	width: 100%;
+	border-collapse: collapse;
+	border: solid 1px #ddd;
+}
+
+.settings-wrapper table th {
+	font-weight: normal;
+	background: #f1f1f1;
+	border: solid 1px #ddd;
+	padding: 3px 4px;
+	font-size: 12px;
+}
+
+.settings-wrapper table td {
+	font-size: 11px;
+	border: solid 1px #ddd;
+	padding: 3px 4px;
+}
+
+#debug {
+	border: dashed 1px #ff0000;
+	width: 800px;
+	margin: auto;
+}
+
