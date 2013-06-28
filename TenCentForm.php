@@ -24,7 +24,6 @@ class TenCentForm
 					$mixedMapping = self::getMixedMapping(Utils::toObj($config));
 					if (!empty($mixedMapping->redirect_url)) {
 						wp_redirect($mixedMapping->redirect_url);
-						//exit;
 						die();
 					}
 

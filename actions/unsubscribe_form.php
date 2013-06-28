@@ -8,11 +8,8 @@ $campaignId = $_REQUEST['campaignId'];
 <head>
 	<title><?php echo TenCentDao::getSetting('tencentmail_company_name') ?> : Unsubscribe Confirmation</title>
 	<?php
-
-//	$css = str_replace("actions/unsubscribe_form.php", "resources/css/unsubscribe.css", plugin_basename(__FILE__));
 	$css = "resources/css/unsubscribe.css";
 	echo '<link rel="stylesheet" type="text/css" href="' . MY_PLUGIN_BASE_URL . $css . '"/>';
-
 	?>
 </head>
 <body>
@@ -48,35 +45,40 @@ $campaignId = $_REQUEST['campaignId'];
 
 				<a href="<?php echo $requestUri ?>" title="Submit Form"><?php echo $buttonText ?></a>
 
-				<?php
-				die();
-				?>
+				<?php die(); ?>
 
 			<?php
 			} else {
+				if (WP_DEBUG) {
+					echo '$list was expected to not be empty <br/>';
+					echo '$list = ' . $list . '<br />';
+					echo '$email = ' . $email . '<br />';
+					echo '$listName = ' . $listName . '<br />';
+					echo '$campaignId = ' . $campaignId . '<br />';
+				}
 
 				$error = "<p>Something went wrong when trying to unsubscribe your email address at: $email</p><p>Please contact us at : " . TenCentDao::getSetting('tencentmail_support_email') . "</p>";
 				$title = TenCentDao::getSetting('tencentmail_company_name') . " : Failed to Unsubscribe";
 				wp_die($error, $title);
-
 			}
-
-
 		} catch (Exception $e) {
-
+			if (WP_DEBUG) {
+				var_dump($e);
+			}
 			$error = "<p>Something went wrong when trying to unsubscribe your email address at: $email</p><p>Please contact us at : " . TenCentDao::getSetting('tencentmail_support_email') . "</p>";
 			$title = TenCentDao::getSetting('tencentmail_company_name') . " : Failed to Unsubscribe";
 			wp_die($error, $title);
-
 		}
-
-
 	} else {
-
+		if (WP_DEBUG) {
+			echo 'input data was not valid <br/>';
+			echo '$email = ' . $email . '<br />';
+			echo '$listName = ' . $listName . '<br />';
+			echo '$campaignId = ' . $campaignId . '<br />';
+		}
 		$error = "<p>Something went wrong when trying to unsubscribe your email address at: $email</p><p>Please contact us at : " . TenCentDao::getSetting('tencentmail_support_email') . "</p>";
 		$title = TenCentDao::getSetting('tencentmail_company_name') . " : Failed to Unsubscribe";
 		wp_die($error, $title);
-
 	}?>
 
 </div>

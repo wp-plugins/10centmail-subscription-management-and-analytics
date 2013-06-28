@@ -2,18 +2,6 @@
 
 class TenCentDao
 {
-
-//	private static function getSiteId($isNetworkWide = false)
-//	{
-//		if ($isNetworkWide)
-//			return 0;
-//		if (is_multisite()) {
-//			return get_current_blog_id();
-//		} else {
-//			return 1;
-//		}
-//	}
-
 	public static function saveSnsMessage($type, $message)
 	{
 		global $wpdb;
@@ -21,11 +9,9 @@ class TenCentDao
 		$data = array(
 			"date" => date('Y-m-d H:i:s'),
 			"type" => $type,
-			"message" => "$message" //,
-//			"siteId" => TenCentDao::getSiteId()
+			"message" => "$message"
 		);
 
-//		$types = array("%s", "%s", "%s", "%d");
 		$format = array("%s", "%s", "%s");
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::SNS_MESSAGE_TABLE);
 		$result = $wpdb->insert($tableName, $data, $format);
@@ -52,10 +38,8 @@ class TenCentDao
 			"ip" => "$ip",
 			"agent" => "$agent",
 			"referer" => "$referer",
-			"date" => date('Y-m-d H:i:s') //,
-//			"siteId" => TenCentDao::getSiteId()
+			"date" => date('Y-m-d H:i:s')
 		);
-//		$types = array("%s", "%s", "%s", "%s", "%s", "%s", "%s", "%d");
 		$format = array("%s", "%s", "%s", "%s", "%s", "%s", "%s");
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::TRACKING_TABLE);
 		$result = $wpdb->insert($tableName, $data, $format);
@@ -66,18 +50,14 @@ class TenCentDao
 	public static function updateContactLists($currentContactLists)
 	{
 		global $wpdb;
-		$insertResult = 0;
-		$updateResult = 0;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::CONTACT_LISTS_TABLE);
 
 		$dbLists = self::getAllContactLists();
 		$dbListsObj = self::getContactListsObj($dbLists);
 
 		$currentListsArray = explode(",", $currentContactLists);
-		$currentListsObj = Utils::toObjNoValue($currentListsArray);
 
 		$inactiveLists = array();
-		$activeLists = array();
 
 		foreach ($currentListsArray as $contactList) {
 			$list = trim($contactList);
@@ -98,12 +78,10 @@ class TenCentDao
 
 		$separator = "";
 		$count = 0;
-//		$insertSqlRaw = "INSERT INTO $tableName (list, active, siteId) VALUES ";
 		$insertSqlRaw = "INSERT INTO $tableName (list, active) VALUES ";
 		foreach ($dbListsObj as $key => $contactList) {
 			if (!$contactList->update && $contactList->add) {
 				$count++;
-//				$insertSqlRaw .= $separator . "('" . trim($contactList->list) . "', " . Utils::TRUE . ", " . TenCentDao::getSiteId() . ")";
 				$insertSqlRaw .= $separator . "('" . trim($contactList->list) . "', " . Utils::TRUE . ")";
 				$separator = ",";
 			} else {
@@ -113,7 +91,6 @@ class TenCentDao
 
 		foreach ($inactiveLists as $contactList) {
 			$status = ($contactList->newStatus == Utils::TRUE ? Utils::TRUE : Utils::FALSE);
-//			$rawSql = "UPDATE $tableName set active = " . $status . " where id = $contactList->id and siteId = $contactList->siteId;";
 			$rawSql = "UPDATE $tableName set active = " . $status . " where id = $contactList->id;";
 			$updateSQL = $wpdb->prepare($rawSql);
 			$updateResult = $wpdb->query($updateSQL);
@@ -128,19 +105,16 @@ class TenCentDao
 
 	public static function getAllContactLists()
 	{
-		//return self::getContactLists("WHERE siteId = " . TenCentDao::getSiteId());
 		return self::getContactLists();
 	}
 
 	public static function getActiveContactLists()
 	{
-//		return self::getContactLists("WHERE active = 0 and siteId = " . TenCentDao::getSiteId());
 		return self::getContactLists("WHERE active = 0");
 	}
 
 	public static function getInActiveContactLists()
 	{
-//		return self::getContactLists("WHERE active = 1 and siteId = " . TenCentDao::getSiteId());
 		return self::getContactLists("WHERE active = 1");
 	}
 
@@ -173,8 +147,6 @@ class TenCentDao
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::CONTACT_LISTS_TABLE);
-//		$siteId = TenCentDao::getSiteId();
-//		$sql = "SELECT * FROM $tableName WHERE list='$list' AND siteId = $siteId;";
 		$sql = "SELECT * FROM $tableName WHERE list = '$list'";
 		$listRow = $wpdb->get_row($sql);
 		return $listRow;
@@ -182,8 +154,6 @@ class TenCentDao
 
 	public static function removeEverythingForContactList($id)
 	{
-//		global $wpdb;
-//		$tableName = TenDaoUtil::getTableName(TenDaoUtil::CONTACT_LISTS_TABLE);
 		if (self::contactListExists($id)) {
 			self::deleteContactList($id);
 			self::deleteContactListSettings($id);
@@ -202,8 +172,6 @@ class TenCentDao
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::CONTACT_LIST_SETTINGS_TABLE);
-//		$siteId = TenCentDao::getSiteId();
-//		$deleteSql = "DELETE FROM $tableName WHERE listId = $listId AND siteId = $siteId;";
 		$deleteSql = "DELETE FROM $tableName WHERE listId = $listId;";
 		return $wpdb->query($deleteSql);
 	}
@@ -213,8 +181,6 @@ class TenCentDao
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::CONTACT_LISTS_TABLE);
 		if (self::contactListExists($id)) {
-//			$siteId = TenCentDao::getSiteId();
-//			$deleteSql = "DELETE FROM $tableName WHERE id='$id' AND siteId = $siteId;";
 			$deleteSql = "DELETE FROM $tableName WHERE id = '$id';";
 			return $wpdb->query($deleteSql);
 		}
@@ -224,8 +190,6 @@ class TenCentDao
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::CONTACT_LISTS_TABLE);
-//		$siteId = TenCentDao::getSiteId();
-//		$contactListRow = $wpdb->get_row("SELECT * FROM $tableName WHERE list='$list' AND siteId = $siteId;");
 		$contactListRow = $wpdb->get_row("SELECT * FROM $tableName WHERE list = '$list';");
 		return (sizeof($contactListRow) == 0) ? false : true;
 	}
@@ -242,7 +206,6 @@ class TenCentDao
 		global $wpdb;
 
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::CONTACT_LIST_SETTINGS_TABLE);
-//		$query = "SELECT * FROM $tableName WHERE listId = $listId and siteId = " . TenCentDao::getSiteId();
 		$query = "SELECT * FROM $tableName WHERE listId = $listId;";
 
 		$settings = $wpdb->get_row($query, ARRAY_A);
@@ -278,7 +241,6 @@ class TenCentDao
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::CONTACT_LIST_SETTINGS_TABLE);
-//		$query = "SELECT * FROM $tableName WHERE listId = '$listId' and siteId = " . TenCentDao::getSiteId();
 		$query = "SELECT * FROM $tableName WHERE listId = '$listId';";
 		$results = $wpdb->query($query);
 		return ($results > 0) ? true : false;
@@ -288,11 +250,9 @@ class TenCentDao
 	{
 		global $wpdb;
 
-		//$dataTypes = self::getSettingsDataTypes($settings);
 		$settingsId = self::getSettingsId($listId);
 		$where = array(
-			"ID" => $settingsId //,
-//			"siteId" => TenCentDao::getSiteId()
+			"ID" => $settingsId
 		);
 
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::CONTACT_LIST_SETTINGS_TABLE);
@@ -314,8 +274,6 @@ class TenCentDao
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::CONTACT_LIST_SETTINGS_TABLE);
-//		$siteId = TenCentDao::getSiteId();
-//		$row = $wpdb->get_row("SELECT * FROM $tableName WHERE listId = '$listId' AND siteId = $siteId", ARRAY_A);
 		$row = $wpdb->get_row("SELECT * FROM $tableName WHERE listId = '$listId';", ARRAY_A);
 		return $row['id'];
 	}
@@ -327,12 +285,10 @@ class TenCentDao
 			$data = array("confirmedDoubleOpt" => Utils::TRUE);
 
 			$where = array(
-				"ID" => self::getSubscriptionRowId($email, $list) //,
-//				"siteId" => TenCentDao::getSiteId()
+				"ID" => self::getSubscriptionRowId($email, $list)
 			);
 			$format = array(
-				"%d" //,
-//				"%d"
+				"%d"
 			);
 
 			$tableName = TenDaoUtil::getTableName(TenDaoUtil::SUBSCRIBE_TABLE);
@@ -350,7 +306,6 @@ class TenCentDao
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::SUBSCRIBE_TABLE);
-//		$sql = "SELECT * FROM $tableName WHERE status=" . TenDaoUtil::SUBSCRIBED . " and email = '$email' and list = '$list' and siteId = " . TenCentDao::getSiteId();
 		$sql = "SELECT * FROM $tableName WHERE status=" . TenDaoUtil::SUBSCRIBED . " and email = '$email' and list = '$list';";
 		$rows = $wpdb->get_row($sql);
 		return (sizeof($rows) == 0) ? false : true;
@@ -360,7 +315,6 @@ class TenCentDao
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::SUBSCRIBE_TABLE);
-//		$sql = "SELECT * FROM $tableName WHERE status=" . TenDaoUtil::UNSUBSCRIBED . " and email = '$email' and list = '$list' and siteId = " . TenCentDao::getSiteId();
 		$sql = "SELECT * FROM $tableName WHERE status=" . TenDaoUtil::UNSUBSCRIBED . " and email = '$email' and list = '$list';";
 		$rows = $wpdb->get_row($sql);
 		return (sizeof($rows) == 0) ? false : true;
@@ -377,7 +331,6 @@ class TenCentDao
 				}
 			}
 		}
-//		$obj["siteId"] = TenCentDao::getSiteId();
 		return $obj;
 	}
 
@@ -389,7 +342,6 @@ class TenCentDao
 				$obj[] = $config->$property->placeholder;
 			}
 		}
-//		$obj["siteId"] = "%d";
 		return $obj;
 	}
 
@@ -397,8 +349,6 @@ class TenCentDao
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::SUBSCRIBE_TABLE);
-//		$siteId = TenCentDao::getSiteId();
-//		$row = $wpdb->get_row("SELECT * FROM $tableName WHERE email = '$email' AND list = '$list' AND siteId = $siteId", ARRAY_A);
 		$row = $wpdb->get_row("SELECT * FROM $tableName WHERE email = '$email' AND list = '$list';", ARRAY_A);
 		return $row['id'];
 	}
@@ -412,12 +362,17 @@ class TenCentDao
 			$result = $wpdb->insert(TenDaoUtil::getTableName(TenDaoUtil::SUBSCRIBE_TABLE), $data, $dataTypes);
 
 			if ($result == 1) return true;
+			if (WP_DEBUG) {
+				echo '$result was expected to == 1 <br/>';
+				echo '$data = ' . $data . '<br />';
+				var_dump($dataTypes);
+				echo '$result = ' . $result . '<br />';
+			}
 
 			throw new Exception("Something went wrong, please try again");
 		} else {
 			$tableName = TenDaoUtil::getTableName(TenDaoUtil::SUBSCRIBE_TABLE);
-//			$subscription = $wpdb->get_row("SELECT * FROM " . $tableName . " WHERE email = '" . $config->email->value . "' AND list = '" . $config->list->value . "' and siteId = " . TenCentDao::getSiteId() . ";");
-			$subscription = $wpdb->get_row("SELECT * FROM " . $tableName . " WHERE email = '" . $config->email->value . "' AND list = '" . $config->list->value . ";");
+			$subscription = $wpdb->get_row("SELECT * FROM " . $tableName . " WHERE email = '" . $config->email->value . "' AND list = '" . $config->list->value . "';");
 			$rowId = $subscription->id;
 			$data = self::getInsertData($config);
 			$dataTypes = self::getDataTypes($config);
@@ -433,6 +388,16 @@ class TenCentDao
 
 			if ($result == 1) return true;
 
+			if (WP_DEBUG) {
+				echo '$result was expected to == 1 <br/>';
+				echo '$result = ' . $result . '<br />';
+				echo '$tableName = ' . $tableName . '<br />';
+				echo '$subscription = ' . $subscription . '<br />';
+				echo '$rowId = ' . $rowId . '<br />';
+				echo '$data = ' . $data . '<br />';
+				var_dump($data);
+				var_dump($dataTypes);
+			}
 			throw new Exception("Something went wrong, please try again");
 		}
 	}
@@ -472,7 +437,6 @@ class TenCentDao
 
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::SUBSCRIBE_TABLE);
-//		$results = $wpdb->query("SELECT * FROM $tableName WHERE status = " . TenDaoUtil::SUBSCRIBED . " and email = '$email' and list = '$list' and siteId = " . TenCentDao::getSiteId());
 		$results = $wpdb->query("SELECT * FROM $tableName WHERE status = " . TenDaoUtil::SUBSCRIBED . " and email = '$email' and list = '$list';");
 
 		return ($results == 0) ? true : false;
@@ -484,7 +448,6 @@ class TenCentDao
 		$results = 0;
 		if (isset($list)) {
 			$tableName = TenDaoUtil::getTableName(TenDaoUtil::SUBSCRIBE_TABLE);
-//			$querySQL = $wpdb->prepare("SELECT * FROM $tableName WHERE status=" . TenDaoUtil::SUBSCRIBED . " and list = '$list' and siteId = " . TenCentDao::getSiteId(), ARRAY_A);
 			$querySQL = $wpdb->prepare("SELECT * FROM $tableName WHERE status = " . TenDaoUtil::SUBSCRIBED . " and list = '$list';", ARRAY_A);
 			$results = $wpdb->get_results($querySQL);
 		}
@@ -497,7 +460,6 @@ class TenCentDao
 		$results = 0;
 		if (isset($list)) {
 			$tableName = TenDaoUtil::getTableName(TenDaoUtil::SUBSCRIBE_TABLE);
-//			$querySQL = $wpdb->prepare("SELECT * FROM $tableName WHERE status = " . TenDaoUtil::UNSUBSCRIBED . " and list = '$list' and siteId = " . TenCentDao::getSiteId(), ARRAY_A);
 			$querySQL = $wpdb->prepare("SELECT * FROM $tableName WHERE status = " . TenDaoUtil::UNSUBSCRIBED . " and list = '$list';", ARRAY_A);
 			$results = $wpdb->get_results($querySQL);
 		}
@@ -512,10 +474,6 @@ class TenCentDao
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::SUBSCRIBE_TABLE);
 
 		if (self::isSubscribed($email, $list) || self::isUnSubscribed($email, $list)) {
-//			$sql = "UPDATE $tableName SET status=" . TenDaoUtil::UNSUBSCRIBED . ", campaignId = $campaignId, `date` = '$now' WHERE email = '$email' and list = '$list' and siteId = " . TenCentDao::getSiteId();
-//			$sql = "UPDATE $tableName SET status = " . TenDaoUtil::UNSUBSCRIBED . ", campaignId = $campaignId, `date` = '$now' WHERE email = '$email' and list = '$list';";
-//			$stmt = $wpdb->prepare($sql);
-//			$result = $wpdb->query($stmt);
 			$data = array(
 				"campaignId" => $campaignId,
 				"date" => $now,
@@ -531,17 +489,6 @@ class TenCentDao
 
 			$result = $wpdb->update($tableName, $data, $where, $whereFormat);
 		} else {
-//			$data = array(
-//				"email" => $email,
-//				"list" => $list,
-//				"campaignId" => $campaignId,
-//				"date" => $now,
-//				"status" => TenDaoUtil::UNSUBSCRIBED,
-//				"requiresDoubleOpt" => Utils::FALSE,
-//				"siteId" => TenCentDao::getSiteId()
-//			);
-//
-//			$types = array("%s", "%s", "%d", "%s", "%d", "%d", "%d");
 			$data = array(
 				"email" => $email,
 				"list" => $list,
@@ -564,13 +511,11 @@ class TenCentDao
 			if (!self::settingExists($setting)) {
 				$data = array(
 					"setting" => $setting,
-					"value" => $value //,
-//					"siteId" => TenCentDao::getSiteId($isNetworkWide)
+					"value" => $value
 				);
 				$format = array(
 					"%s",
-					"%s" //,
-//					"%d"
+					"%s"
 				);
 				$tableName = TenDaoUtil::getTableName(TenDaoUtil::SETTINGS_TABLE);
 				$result = $wpdb->insert(
@@ -588,14 +533,11 @@ class TenCentDao
 		return null;
 	}
 
-//	public static function removeSetting($setting, $isNetworkWide = false)
 	public static function removeSetting($setting)
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::SETTINGS_TABLE);
-//		if (self::settingExists($setting, $isNetworkWide)) {
 		if (self::settingExists($setting)) {
-//			$deleteSql = "DELETE FROM $tableName WHERE setting = '$setting' and siteId = " . TenCentDao::getSiteId($isNetworkWide) . ";";
 			$deleteSql = "DELETE FROM $tableName WHERE setting = '$setting';";
 			return $wpdb->query($deleteSql);
 		}
@@ -609,14 +551,11 @@ class TenCentDao
 	 * @param string $setting name of the setting value to retrieve
 	 * @return string the setting value
 	 */
-//	public static function getSetting($setting, $isNetworkWide = false)
 	public static function getSetting($setting)
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::SETTINGS_TABLE);
-//		if (self::settingExists($setting, $isNetworkWide)) {
 		if (self::settingExists($setting)) {
-//				$sql = "SELECT * FROM $tableName WHERE setting = '$setting' and siteId = " . TenCentDao::getSiteId($isNetworkWide) . ";";
 			$sql = "SELECT * FROM $tableName WHERE setting = '$setting';";
 			$settingRow = $wpdb->get_row($sql);
 			return $settingRow->value;
@@ -625,16 +564,11 @@ class TenCentDao
 		}
 	}
 
-//	public static function settingExists($setting, $isNetworkWide = false)
 	public static function settingExists($setting)
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::SETTINGS_TABLE);
-//		if ($isNetworkWide) {
 		$sql = "SELECT * FROM $tableName WHERE setting = '$setting';";
-//		} else {
-//			$sql = "SELECT * FROM $tableName WHERE setting = '$setting' and siteId = " . TenCentDao::getSiteId($isNetworkWide) . ";";
-//		}
 		$settingRows = $wpdb->get_row($sql);
 		return (sizeof($settingRows) == 0) ? false : true;
 	}
@@ -646,22 +580,17 @@ class TenCentDao
 		echo 'table name = ' . $tableName . '<br/>';
 		$sql = "SELECT * FROM $tableName;";
 		echo '$sql = ' . $sql . '<br/>';
-//		$settingRows = $wpdb->get_row($sql, ARRAY_N);
 		$settingRows = $wpdb->get_row($sql);
 
 		echo '$settingRows = ' . $settingRows . '<br/>';
 		echo 'sizeof($settingRows) = ' . sizeof($settingRows) . '<br/>';
 	}
 
-//	public static function updateSetting($setting, $value, $isNetworkWide = false)
 	public static function updateSetting($setting, $value)
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::SETTINGS_TABLE);
-//		if (self::settingExists($setting, $isNetworkWide)) {
 		if (self::settingExists($setting)) {
-
-//				$settingRow = $wpdb->get_row("SELECT * FROM $tableName WHERE setting = '$setting' and siteId = " . TenCentDao::getSiteId($isNetworkWide) . ";");
 			$settingRow = $wpdb->get_row("SELECT * FROM $tableName WHERE setting = '$setting';");
 			$rowId = $settingRow->id;
 
@@ -672,17 +601,14 @@ class TenCentDao
 					"value" => $value
 				),
 				array(
-					"ID" => $rowId //,
-//					"siteId" => TenCentDao::getSiteId($isNetworkWide)
+					"ID" => $rowId
 				),
 				array(
-					"%s" //,
-//					"%s"
+					"%s"
 				)
 			);
 			return $result;
 		} else {
-//				self::addSetting($setting, $value, $isNetworkWide);
 			return self::addSetting($setting, $value);
 		}
 	}
@@ -719,7 +645,6 @@ class TenCentDao
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::SUBSCRIBE_TABLE);
-//		$querySQL = $wpdb->prepare("SELECT * FROM $tableName WHERE status = " . TenDaoUtil::SUBSCRIBED . " and siteId = " . TenCentDao::getSiteId(), ARRAY_A);
 		$querySQL = $wpdb->prepare("SELECT * FROM $tableName WHERE status = " . TenDaoUtil::SUBSCRIBED . ";", ARRAY_A);
 		$results = $wpdb->get_results($querySQL);
 		return $results;
@@ -729,7 +654,6 @@ class TenCentDao
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::SUBSCRIBE_TABLE);
-//		$querySQL = $wpdb->prepare("SELECT * FROM $tableName WHERE status = " . TenDaoUtil::UNSUBSCRIBED . " and siteId = " . TenCentDao::getSiteId(), ARRAY_A);
 		$querySQL = $wpdb->prepare("SELECT * FROM $tableName WHERE status = " . TenDaoUtil::UNSUBSCRIBED . ";", ARRAY_A);
 		$results = $wpdb->get_results($querySQL);
 		return $results;
@@ -739,7 +663,6 @@ class TenCentDao
 	{
 		global $wpdb;
 		$tableName = TenDaoUtil::getTableName(TenDaoUtil::TRACKING_TABLE);
-//		$querySQL = $wpdb->prepare("SELECT * FROM $tableName where siteId = " . TenCentDao::getSiteId(), ARRAY_A);
 		$querySQL = $wpdb->prepare("SELECT * FROM $tableName", ARRAY_A);
 		$results = $wpdb->get_results($querySQL);
 		return $results;
@@ -789,16 +712,6 @@ class TenCentDao
 		self::dumpTable(TenDaoUtil::getTableName(TenDaoUtil::CONTACT_LIST_SETTINGS_TABLE));
 		self::dumpTable(TenDaoUtil::getTableName(TenDaoUtil::SNS_MESSAGE_TABLE));
 	}
-
-//	public static function addSiteIdToExistingTables()
-//	{
-//		self::safelyAddColumn(TenDaoUtil::getTableName(TenDaoUtil::SUBSCRIBE_TABLE), "siteId", "int(11)");
-//		self::safelyAddColumn(TenDaoUtil::getTableName(TenDaoUtil::TRACKING_TABLE), "siteId", "int(11)");
-//		self::safelyAddColumn(TenDaoUtil::getTableName(TenDaoUtil::SETTINGS_TABLE), "siteId", "int(11)");
-//		self::safelyAddColumn(TenDaoUtil::getTableName(TenDaoUtil::CONTACT_LISTS_TABLE), "siteId", "int(11)");
-//		self::safelyAddColumn(TenDaoUtil::getTableName(TenDaoUtil::CONTACT_LIST_SETTINGS_TABLE), "siteId", "int(11)");
-//		self::safelyAddColumn(TenDaoUtil::getTableName(TenDaoUtil::SNS_MESSAGE_TABLE), "siteId", "int(11)");
-//	}
 
 	/**
 	 * Safely adds a column to a MySQL database

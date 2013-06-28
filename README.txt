@@ -3,17 +3,19 @@ Contributors: 10CentMail
 Tags: 10CentMail, Email Marketing, Amazon SES, email
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 2.1.48
+Stable tag: 2.1.50
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 10CentMail Subscription Management and Analytics plugin for Wordpress.
 
 == Description ==
-The 10CentMail Wordpress plugin provides subscription management and analytics data to the 10CentMail desktop application.
+The 10CentMail Wordpress plugin provides subscription management and analytics data to the 10CentMail
+desktop application.
 
-This plugin is required for 10CentMail to provide subscribe and unsubscribe functionality as well as open and click tracking
-to the application. Install this plugin on any public facing website that will be used as a central point of customer interaction.
+This plugin is required for 10CentMail to provide subscribe and unsubscribe functionality as well as
+open and click tracking to the application. Install this plugin on any public facing website that will
+be used as a central point of customer interaction.
 
 == Installation ==
 1. Unzip tencentmail.zip to a folder. The zip file contains a folder named `tencentmail`.
@@ -66,3 +68,6 @@ Fix for WordPress sites that use symlinks
 
 = 2.1.48
 Updated for WordPress MultiSite and WordPress sites with or without symlinks, on sites that use arbitrary plugin names
+
+= 2.1.50 =
+Fix for subscribe page when a subscriber subscribes to a list more than once.

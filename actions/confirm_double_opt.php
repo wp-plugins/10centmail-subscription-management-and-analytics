@@ -2,7 +2,6 @@
 
 function confirmDoubleOpt()
 {
-
 	$email = $_REQUEST['email'];
 	$list = $_REQUEST['list'];
 
@@ -11,9 +10,7 @@ function confirmDoubleOpt()
 		isset($list) &&
 		!empty($list)
 	) {
-
 		try {
-
 			TenCentDao::confirmOptIn($email, $list);
 
 			$config = (object)array();
@@ -29,24 +26,24 @@ function confirmDoubleOpt()
 			$message = "<p>You have successfully confirmed to opt in to receive emails from us to your email at : $email</p>";
 			$title = TenCentDao::getSetting('tencentmail_company_name') . " : Opt In Confirmed";
 			wp_die($message, $title);
-
-
 		} catch (Exception $e) {
-
+			if (WP_DEBUG) {
+				var_dump($e);
+			}
 			$error = "<p>Something went wrong when trying to confirm your opt in to receive emails at: $email</p><p>Please contact us at :" . TenCentDao::getSetting('tencentmail_company_contact') . "</p>";
 			$title = TenCentDao::getSetting('tencentmail_company_name') . " : Failed to Confirm Opt In";
 			wp_die($error, $title);
 
 		}
 
-
 	} else {
-
+		if (WP_DEBUG) {
+			echo 'values did not validate <br/>';
+			echo '$email = ' . $email . '<br />';
+			echo '$list = ' . $list . '<br />';
+		}
 		$error = "<p>Something went wrong when trying to confirm your opt in to receive emails at: $email</p><p>Please contact us at :" . TenCentDao::getSetting('tencentmail_company_contact') . "</p>";
 		$title = TenCentDao::getSetting('tencentmail_company_name') . " : Failed to Confirm Opt In";
 		wp_die($error, $title);
-
-
 	}
-
 }

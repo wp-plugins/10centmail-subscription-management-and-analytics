@@ -2,7 +2,6 @@
 
 function processAction()
 {
-	//$key = $_REQUEST['tcmKey'];
 	$action = $_REQUEST['10cent'];
 
 	if (strtoupper($_SERVER['REQUEST_METHOD']) == 'GET') {
@@ -25,9 +24,6 @@ function processAction()
 			case 'endpoints' :
 				getEndpoints();
 				break;
-//			case 'metadata' :
-//				getMetadata();
-//				break;
 			case 'track' :
 				track();
 				break;

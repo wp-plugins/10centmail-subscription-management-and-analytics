@@ -4,37 +4,17 @@ defined('ABSPATH') OR exit;
 Plugin Name: 10CentMail
 Plugin URI: http://10centmail.com/blog/10centmail-wordpress-plugin/
 Description: 10CentMail Subscription Management and Analytics plugin for Wordpress.
-Version: 2.1.48
+Version: 2.1.50
 Author: 10CentMail
 Author URI: http://10centmail.com
 License: GPL
 */
 
-//global $wpdb;
-//$wpdb->show_errors(true);
+if (WP_DEBUG) {
+	global $wpdb;
+	$wpdb->show_errors(true);
+}
 if (!defined('MY_PLUGIN_BASE_URL')) {
-//	$pluginDir = WP_CONTENT_DIR . '/plugins';
-//	if ($linked = readlink($pluginDir)) {
-//		$pluginDir = WP_CONTENT_DIR . '/' . $linked;
-//	}
-//	$_SERVER["SCRIPT_FILENAME"]
-//	$_SERVER['REQUEST_URL']
-//	$pluginDir = str_replace('\\', '/', $pluginDir); // sanitize for Win32 installs
-//	$pluginDir = preg_replace('|/+|','/', $pluginDir); // remove any duplicate slash
-//	define('MY_PLUGIN_DIR', $pluginDir); // full path, no trailing slash
-	// get the folder for this plugin by getting the directory name for this __FILE__ then,
-	//  break up into components by splitting along / \
-	//  pick the 2nd to last item from the list
-	//$pathParts = explode("")
-	//$pluginName = pathinfo($pluginDir, PATHINFO_BASENAME);
-	//substr()
-	//	$icon = str_replace("TenCent.php", "resources/images/tencentmail-icon.png", plugin_basename(__FILE__));
-//	define('MY_PLUGIN_NAME', str_("/" . $pluginName, "resources/images/tencentmail-icon.png", plugin_basename(__FILE__)));
-//	define('MY_PLUGIN_BASE_URL', plugins_url() . '/' . MY_PLUGIN_NAME);
-//	$myPluginBaseUrl = str_replace("TenCent.php","", $_SERVER['REQUEST_URL']);
-//	$thispath = str_replace('\\', '/', preg_replace('|/+|', '/', $_SERVER['PHP_SELF']));
-//	$scriptname = end(explode('/', $thispath));
-//	$scriptpath = str_replace($scriptname, '', $_SERVER['PHP_SELF']);
 	$thispath = str_replace('\\', '/', preg_replace('|/+|', '/', __FILE__));
 	$pathparts = explode('/', $thispath);
 	end($pathparts);
@@ -90,7 +70,6 @@ add_action('init', 'do_output_buffer'); //allow redirection, even if my theme st
 add_action('plugins_loaded', 'tencentmail_setup_database');
 
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'tcm_plugin_actions', 10, 1);
-//add_filter('plugin_action_links_' . MY_PLUGIN_FILE, 'tcm_plugin_actions', 10, 1);
 register_activation_hook(__FILE__, 'tencentmail_activate');
 register_deactivation_hook(__FILE__, 'tencentmail_deactivate');
 register_uninstall_hook(__FILE__, 'tencentmail_uninstall');
@@ -117,7 +96,6 @@ function tencentmail_activate()
 {
 	if (!current_user_can('activate_plugins'))
 		return;
-	//tencentmail_setup_database();
 }
 
 function tencentmail_deactivate()
@@ -133,7 +111,7 @@ function tencentmail_deactivate()
 
 function tencentmail_uninstall()
 {
-	TenCentDao::dropTables();
+	//TenCentDao::dropTables();
 }
 
 /**
@@ -148,7 +126,6 @@ function tencentmail_setup_database()
 		if (!TenDaoUtil::tableExists(TenDaoUtil::getTableName(TenDaoUtil::SETTINGS_TABLE)) ||
 			!TenCentDao::settingExists("tencentmail_version")
 		) {
-
 			//create tables
 			TenCentDao::createTables();
 
@@ -161,7 +138,6 @@ function tencentmail_setup_database()
 			TenCentDao::addSetting("tencentmail_support_email", get_bloginfo('admin_email'));
 			TenCentDao::addSetting("tencentmail_notification_emails", get_bloginfo('admin_email'));
 		} else {
-//			TenCentDao::addSiteIdToExistingTables();
 		}
 
 		TenCentDao::addSetting("tencentmail_version", $pluginData["Version"]);
@@ -184,10 +160,6 @@ function tcm_add_settings()
 		add_options_page("10CentMail Plugin Settings", "10CentMail", 'manage_options', 'tencentmail_settings', 'tcm_settings_page');
 	}
 
-//	$icon = str_replace("TenCent.php", "resources/images/tencentmail-icon.png", plugin_basename(__FILE__));
-//	$icon = MY_PLUGIN_NAME . "/resources/images/tencentmail-icon.png";
-//	$iconurl = plugins_url() . '/' . $icon;
-
 	$icon = "resources/images/tencentmail-icon.png";
 	$iconurl = MY_PLUGIN_BASE_URL . $icon;
 
@@ -208,17 +180,3 @@ function do_output_buffer()
 }
 
 add_shortcode('tencentmail_subscribe_form', 'TenCentForm::renderSubscribeForm');
-
-
-//class TenCentPlugin
-//{
-//	public static function ensure_tables_exist()
-//	{
-//		tencentmail_activate();
-//	}
-//
-//	public static function uninstall()
-//	{
-//		tencentmail_deactivate();
-//	}
-//}
